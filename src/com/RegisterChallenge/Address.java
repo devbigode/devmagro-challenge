@@ -2,16 +2,21 @@ package src.com.RegisterChallenge;
 
 public class Address {
 
-    private int number;
+    private String number;
     private String city;
     private String street;
+    final String constNumber = "NÃO INFORMADO";
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setNumber(String number) {
+        if (!number.isBlank()){
+            this.number = number;
+        } else {
+            this.number = constNumber;
+        }
     }
 
     public String getCity() {
