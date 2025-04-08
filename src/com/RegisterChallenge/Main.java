@@ -4,6 +4,7 @@ import java.io.*;
 import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -92,8 +93,7 @@ public class Main {
                     System.out.println(questionsList.get(3)); // #4
 
                     System.out.print("    - Número da casa: ");
-                    int number = input.nextInt();
-                    input.nextLine();
+                    String number = input.nextLine();
                     pet.setNumber(number);
 
                     System.out.print("    - Cidade: ");
@@ -105,7 +105,7 @@ public class Main {
                     pet.setStreet(street);
 
                     System.out.println(questionsList.get(4)); // #5
-                    pet.setAge(input.nextDouble());
+                    pet.setAge(input.nextLine());
 
                     System.out.println(questionsList.get(5)); // #6
                     pet.setWeight(input.nextDouble());

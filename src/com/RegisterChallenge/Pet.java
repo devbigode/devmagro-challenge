@@ -1,10 +1,12 @@
 package src.com.RegisterChallenge;
 
+import java.util.InputMismatchException;
+
 public class Pet extends Address{
 
     private String name;
     private String lastName;
-    private double age;
+    private String age;
     private double weight;
     private String breed;
     private Type type;
@@ -15,7 +17,17 @@ public class Pet extends Address{
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name.isBlank()){
+            throw new RuntimeException("O nome não foi preenchido.");
+        }
+
+        String nameModify = name.replaceAll("[^a-zA-Z]", "");
+
+        if (nameModify.isEmpty()){
+            throw new InputMismatchException("Não é permitido o uso de caracteres especiais.");
+        }
+
+        this.name = nameModify;
     }
 
     public String getLastName() {
@@ -23,15 +35,38 @@ public class Pet extends Address{
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if (lastName.isBlank()){
+            throw new RuntimeException("O sobrenome não foi preenchido.");
+        }
+
+        String lastNameModify = lastName.replaceAll("[^a-zA-Z]", "");
+
+        if (lastNameModify.isEmpty()){
+            throw new InputMismatchException("Não é permitido o uso de caracteres especiais.");
+        }
+
+        this.lastName = lastNameModify;
     }
 
-    public double getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(double age) {
-        this.age = age;
+    public void setAge(String age) {
+        age = age.replaceAll("[^0-9,.]", "").replace(",", ".");
+        double ageModify = Double.parseDouble(age);
+
+        if (ageModify > 240){
+            throw new RuntimeException("A idade informada é muito alta.");
+        }
+
+        if (ageModify < 12){
+            double ageDouble = ageModify / 12;
+            this.age = String.valueOf(ageDouble);
+        } else{
+            this.age = String.valueOf(ageModify);
+        }
+
     }
 
     public double getWeight() {
@@ -39,6 +74,10 @@ public class Pet extends Address{
     }
 
     public void setWeight(double weight) {
+        if (weight < 0.5 || weight > 60){
+            throw new RuntimeException("O peso informado está fora da normalidade.");
+        }
+
         this.weight = weight;
     }
 
@@ -47,7 +86,13 @@ public class Pet extends Address{
     }
 
     public void setBreed(String breed) {
-        this.breed = breed;
+        String breedModify = breed.replaceAll("[^a-zA-Z]", "");
+
+        if (breedModify.isEmpty()){
+            throw new InputMismatchException("Não é permitido o uso de caracteres especiais.");
+        }
+
+        this.breed = breedModify;
     }
 
     public Type getType() {
