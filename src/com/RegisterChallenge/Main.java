@@ -1,11 +1,10 @@
 package src.com.RegisterChallenge;
 
 import java.io.*;
-import java.security.Permission;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
+
+import static src.com.RegisterChallenge.functions.Function.registerPet;
+import static src.com.RegisterChallenge.functions.Function.toFile;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,9 +31,6 @@ public class Main {
                 }
             }
 
-            /* Exibe somente as perguntas */
-            //questionsList.forEach(System.out::println);
-
             /* 2. Menu */
 
             while (true){
@@ -60,62 +56,8 @@ public class Main {
                 }
 
                 if (choice == 1){
-                    Pet pet = new Pet();
-
-                    System.out.println(questionsList.getFirst()); // #1
-                    pet.setName(input.nextLine());
-                    pet.setLastName(input.nextLine());
-
-                    System.out.println(questionsList.get(1)); // #2
-
-                    String typePet = input.nextLine();
-
-                    if (typePet.equalsIgnoreCase("Cachorro")){
-                        pet.setType(Type.DOG);
-                    }
-
-                    if (typePet.equalsIgnoreCase("Gato")){
-                        pet.setType(Type.CAT);
-                    }
-
-                    System.out.println(questionsList.get(2)); // #3
-
-                    String sexPet = input.nextLine();
-
-                    if (sexPet.equalsIgnoreCase("Macho")){
-                        pet.setSex(Sex.MALE);
-                    }
-
-                    if (sexPet.equalsIgnoreCase("Fêmea")){
-                        pet.setSex(Sex.FEMALE);
-                    }
-
-                    System.out.println(questionsList.get(3)); // #4
-
-                    System.out.print("    - Número da casa: ");
-                    String number = input.nextLine();
-                    pet.setNumber(number);
-
-                    System.out.print("    - Cidade: ");
-                    String city = input.nextLine();
-                    pet.setCity(city);
-
-                    System.out.print("    - Rua: ");
-                    String street = input.nextLine();
-                    pet.setStreet(street);
-
-                    System.out.println(questionsList.get(4)); // #5
-                    pet.setAge(input.nextLine());
-
-                    System.out.println(questionsList.get(5)); // #6
-                    pet.setWeight(input.nextDouble());
-                    input.nextLine();
-
-                    System.out.println(questionsList.get(6)); // #7
-                    pet.setBreed(input.nextLine());
-
-                    System.out.println(pet);
-
+                    Pet petObj = registerPet(questionsList);
+                    toFile(petObj);
                 }
             }
 
